@@ -4,7 +4,7 @@ on: push
 
 jobs:
   job1:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, arc, linux]
 
     outputs:
       output1: ${{ steps.step1.outputs.name}}
@@ -18,7 +18,7 @@ jobs:
         run: echo "age=22" >> "$GITHUB_OUTPUT"
 
   job2:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, arc, linux]
     needs: job1
     steps:
     - env:
