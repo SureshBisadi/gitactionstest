@@ -25,4 +25,16 @@ jobs:
         OUTPUT1: ${{ needs.job1.outputs.output1 }}
         OUTPUT2: ${{ needs.job1.outputs.output2 }}
       run: echo $OUTPUT1 $OUTPUT2
-       
+
+    - name: Show runner and job info
+      run: |
+          echo "Runner Name     : $RUNNER_NAME"
+          echo "Runner OS       : $RUNNER_OS"
+          echo "Runner Arch     : $RUNNER_ARCH"
+          echo "Job ID          : $GITHUB_JOB"
+          echo "Workflow        : $GITHUB_WORKFLOW"
+          echo "Run ID          : $GITHUB_RUN_ID"
+          echo "Run Number      : $GITHUB_RUN_NUMBER"
+
+    - name: Get pod name (Kubernetes)
+      run: echo $(hostname)
