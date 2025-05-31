@@ -1,10 +1,10 @@
 name: ascii testing
 
-on: push
+on: push 
 
 jobs:
   job1:
-    runs-on: [self-hosted, arc, linux]
+    runs-on: [self-hosted]
 
     outputs:
       output1: ${{ steps.step1.outputs.name}}
@@ -18,7 +18,7 @@ jobs:
         run: echo "age=22" >> "$GITHUB_OUTPUT"
 
   job2:
-    runs-on: [self-hosted, arc, linux]
+    runs-on: [self-hosted]
     needs: job1
     steps:
     - env:
