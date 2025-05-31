@@ -11,38 +11,11 @@ jobs:
     - name: Checkout Repo
       uses: actions/checkout@v4
 
-    - name: List repo files
-      run: ls -ltra .github/workflows
+    - name: Printing Vars
+      run: echo Username {{ vars.DOCKER_USERNAME}}
 
-  run_job:
-    needs: build_job
-  
-    runs-on: ubuntu-latest
-    steps:
+    - name: Printing secrets
+      run: echo Password {{ secrets.DOCKER_PASSWORD }}
 
-    - name: Execute a shell script
-      run: |
-        sudo apt-get install cowsay -y
-        cowsay -f dragon "Run for cover, I am DRAGON....RAWR" >> dragon.txt
-        grep -i "dragon" dragon.txt
-
-    - name: Upload text file
-      uses: actions/upload-artifact@v4
-      with:
-        name: dragon-text
-        path: dragon.txt
-
-  show_job:
-    needs: [run_job]
-    runs-on: ubuntu-latest
-    steps:
-
-    - name: Download text file
-      uses: actions/download-artifact@v4
-      with:
-        name: dragon-text
-
-    - name: Execute a shell script
-      run:  cat dragon.txt
 
        
