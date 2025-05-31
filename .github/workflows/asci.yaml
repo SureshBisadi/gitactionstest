@@ -3,19 +3,33 @@ name: ascii testing
 on: push
 
 jobs:
-
-  build_job:
-  
+  dump_contexts_to_log:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout Repo
-      uses: actions/checkout@v4
-
-    - name: Printing Vars
-      run: echo Username ${{ vars.DOCKER_USERNAME}}
-
-    - name: Printing secrets
-      run: echo Password ${{ secrets.DOCKER_PASSWORD }}
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Dump job context
+        env:
+          JOB_CONTEXT: ${{ toJson(job) }}
+        run: echo "$JOB_CONTEXT"
+      - name: Dump steps context
+        env:
+          STEPS_CONTEXT: ${{ toJson(steps) }}
+        run: echo "$STEPS_CONTEXT"
+      - name: Dump runner context
+        env:
+          RUNNER_CONTEXT: ${{ toJson(runner) }}
+        run: echo "$RUNNER_CONTEXT"
+      - name: Dump strategy context
+        env:
+          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
+        run: echo "$STRATEGY_CONTEXT"
+      - name: Dump matrix context
+        env:
+          SECRET_CONTEXT: ${{ toJson(secrets) }}
+        run: echo "$SECRET_CONTEXT"
 
 
        
